@@ -3,6 +3,9 @@ ChangeLog
 
 Please also read the [Upgrade Guide](https://github.com/katzer/cordova-plugin-local-notifications/wiki/Upgrade-Guide) for more information.
 
+#### Version 1.0.6 (14.05.2024)
+- "Compile" has been deprecated use implementation instead for Android
+
 #### Version 1.0.5 (18.07.2022)
 - Fix Null Pointer Exception in Manager Class for Android
 
