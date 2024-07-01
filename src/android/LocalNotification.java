@@ -23,8 +23,13 @@ package de.appplant.cordova.plugin.localnotification;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Pair;
 import android.view.View;
 
@@ -90,6 +95,13 @@ public class LocalNotification extends CordovaPlugin {
     public void onResume (boolean multitasking) {
         super.onResume(multitasking);
         deviceready();
+          Context context = cordova.getActivity().getApplicationContext();
+ AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+     Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+     intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+     cordova.getActivity().startActivity(intent);
+ }
     }
 
     /**
